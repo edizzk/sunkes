@@ -68,3 +68,15 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Steps for running (For Details: Look first 2 commits)
+
+`npx create-react-app my-electron-app`
+
+`cd my-electron-app`
+`yarn add -D concurrently cross-env electron electron-builder electronmon wait-on`
+
+`yarn electron:start`
+
+`yarn electron:package:<platform> `
+
