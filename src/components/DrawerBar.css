@@ -1,33 +1,34 @@
 .drawerbar {
   border-radius: 19px;
   background-color: #060b26;
-  height: 45px;
+  height: 5vh;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
 .menu-bars {
-  margin-left: 2rem;
-  font-size: 2rem;
+  margin-top: 0.3rem;
+  margin-left: 1.3rem;
   background: none;
 }
 
 .drawer-menu {
+  border-radius: 19px;
   background-color: #060b26;
-  width: 250px;
+  width: 20vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   position: fixed;
   top: 0;
   left: -100%;
-  transition: 850ms;
+  transition: 120ms;
 }
 
 .drawer-menu.active {
   left: 0;
-  transition: 350ms;
+  transition: 120ms;
 }
 
 .drawer-text {
@@ -53,6 +54,7 @@
 
 .drawer-text a:hover {
   background-color: #1a83ff;
+  border-radius: 50px;
 }
 
 .drawer-menu-items {
@@ -60,6 +62,7 @@
 }
 
 .drawerbar-toggle {
+  border-radius: 19px;
   background-color: #060b26;
   width: 100%;
   height: 80px;
