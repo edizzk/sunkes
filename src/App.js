@@ -2,9 +2,9 @@ import './App.css';
 import React, { Component } from 'react';
 import DrawerBar from './components/DrawerBar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import CreatePlan from './pages/CreatePlan';
-import ViewPlan from './pages/ViewPlan';
+import Home from './pages/Home/Home';
+import CreatePlan from './pages/CreatePlan/CreatePlan';
+import ViewPlan from './pages/ViewPlan/ViewPlan';
 
 /*class App extends Component {
 
