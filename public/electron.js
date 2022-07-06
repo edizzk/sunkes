@@ -1,11 +1,14 @@
 // Module to control the application lifecycle and the native browser window.
 const { app, BrowserWindow, Menu, protocol } = require("electron");
+const ipcMain = require('electron').ipcMain;
 const path = require("path");
 const url = require("url");
 
+let mainWindow;
+
 // Create the native browser window.
 function createWindow() {
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 1280,
     height: 720,
     minWidth: 640,
@@ -15,11 +18,14 @@ function createWindow() {
     // Set the path of an additional "preload" script that can be used to
     // communicate between node-land and browser-land.
     webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
+      //preload: path.join(__dirname, "preload.js"),
+      nodeIntegration: true,
+      contextIsolation: false,
+      enableRemoteModule: true,
     },
   });
 
-Menu.setApplicationMenu(null);
+  Menu.setApplicationMenu(null);
 
   // In production, set the initial browser path to the local bundle generated
   // by the Create React App build process.
@@ -37,6 +43,15 @@ Menu.setApplicationMenu(null);
   if (!app.isPackaged) {
     mainWindow.webContents.openDevTools();
   }
+
+  mainWindow.on('maximize', () => {
+    mainWindow.webContents.send('maximized')
+  })
+
+  mainWindow.on('unmaximize', () => {
+      mainWindow.webContents.send('unmaximized')
+  })
+
 }
 
 // Setup a local proxy to adjust the paths of requested files when loading
@@ -53,6 +68,22 @@ function setupLocalFilesNormalizerProxy() {
     }
   );
 }
+
+ipcMain.handle('minimize-event', () => {
+  mainWindow.minimize();
+})
+
+ipcMain.handle('maximize-event', () => {
+  mainWindow.maximize();
+})
+
+ipcMain.handle('unmaximize-event', () => {
+  mainWindow.unmaximize();
+})
+
+ipcMain.handle('close-event', () => {
+  app.quit();
+})
 
 // This method will be called when Electron has finished its initialization and
 // is ready to create the browser windows.

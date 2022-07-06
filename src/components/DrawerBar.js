@@ -6,11 +6,38 @@ import { SidebarData } from './SidebarData';
 import './DrawerBar.css';
 import { IconContext } from 'react-icons';
 
+const ipcRenderer = window.require('electron').ipcRenderer
+
 function DrawerBar() {
   const [sidebar, setSidebar] = useState(false);
+  const [isMaximized, setIsMaximized] = useState()
+
+  ipcRenderer.on('maximized', () => {
+    setIsMaximized(true)
+  })
+
+  ipcRenderer.on('unmaximized', () => {
+    setIsMaximized(false)
+  })
 
   const showSidebar = () => setSidebar(!sidebar);
-  
+
+  const minimizeScreen = () => {
+      ipcRenderer.invoke('minimize-event')
+  }
+
+  const maximizeScreen = () => {
+      ipcRenderer.invoke('maximize-event')
+  }
+
+  const unmaximizeScreen = () => {
+    ipcRenderer.invoke('unmaximize-event')
+  }
+
+  const closeSreen = () => {
+      ipcRenderer.invoke('close-event')
+  }
+
   return (
     <>
       <IconContext.Provider value={{ color: '#fff' }}>
@@ -24,10 +51,15 @@ function DrawerBar() {
             <Link to='#' className='minimize-bar'>
               <VscIcons.VscChromeMinimize onClick={minimizeScreen} />
             </Link>
-            <Link to='#' className='maximize-bar'>
+            { !isMaximized ?
+              <Link to='#' className='maximize-bar'>
               <VscIcons.VscChromeMaximize onClick={maximizeScreen} />
-              {/* VscChromeRestore (EKRAN BÜYÜDÜKTEN SONRA BU İCON A DÖNÜŞECEK--------------------------------------------------------) */}
             </Link>
+            :
+              <Link to='#' className='maximize-bar'>
+              <VscIcons.VscChromeRestore onClick={unmaximizeScreen} />
+            </Link>
+            }
             <Link to='#' className='close-bar'>
               <VscIcons.VscChromeClose onClick={closeSreen} />
             </Link>
