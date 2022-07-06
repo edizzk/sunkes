@@ -23,20 +23,20 @@ export const SidebarData = [
     cName: 'drawer-text'
   },
   {
-    title: 'Team',
-    path: '/team',
+    title: 'PastPlans',
+    path: '/pastplans',
     icon: <IoIcons.IoMdPeople />,
     cName: 'drawer-text'
   },
   {
-    title: 'Messages',
-    path: '/messages',
+    title: 'About',
+    path: '/about',
     icon: <FaIcons.FaEnvelopeOpenText />,
     cName: 'drawer-text'
   },
   {
-    title: 'Support',
-    path: '/support',
+    title: 'Contact',
+    path: '/contact',
     icon: <IoIcons.IoMdHelpCircle />,
     cName: 'drawer-text'
   }
